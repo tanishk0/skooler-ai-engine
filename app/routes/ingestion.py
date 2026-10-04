@@ -43,7 +43,7 @@ async def ingest_file(request: Request, file: UploadFile = File(...)) -> Ingesti
             try:
                 visual_context = request.app.state.llm.analyze_image(data, content_type)
                 if visual_context:
-                    result.chunks.append(SourceChunk(content=visual_context, type=ElementType.IMAGE, source=filename, metadata={"derived_from": "gemini_vision"}))
+                    result.chunks.append(SourceChunk(content=visual_context, type=ElementType.IMAGE, source=filename, metadata={"derived_from": f"{request.app.state.llm.provider_name}_vision"}))
                     result.metadata.chunk_count = len(result.chunks)
             except LLMError:
                 # Text extraction remains useful if a vision request is rate-limited or unavailable.
