@@ -9,7 +9,7 @@ from app.services.concepts import ConceptService
 from app.services.context import ContextSelector
 from app.services.evaluator import EvaluatorService
 from app.services.ingestion import IngestionService
-from app.services.llm import GeminiLLMClient
+from app.services.llm import create_llm_client
 from app.services.orchestrator import LearningOrchestrator
 from app.services.tutor import TutorService
 
@@ -18,7 +18,7 @@ from app.services.tutor import TutorService
 async def lifespan(app: FastAPI):
     settings = get_settings()
     context_selector = ContextSelector()
-    llm = GeminiLLMClient(settings)
+    llm = create_llm_client(settings)
     ingestion_service = IngestionService(settings)
     app.state.settings = settings
     app.state.llm = llm
