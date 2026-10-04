@@ -12,7 +12,10 @@ copy .env.example .env
 uvicorn app.main:app --reload --port 8000
 ```
 
-Set `GEMINI_API_KEY` in `.env` (never commit it). `GEMINI_MODEL` defaults to `gemini-2.5-flash` and can be changed without touching application code. Gemini's structured JSON responses are validated as Pydantic models before the state machine uses them.
+Set `LLM_PROVIDER` in `.env` to `"gemini"`, `"openai"`, or `"auto"` (which autodetects based on whichever key is present).
+- For Gemini: Set `GEMINI_API_KEY` and optional `GEMINI_MODEL` (defaults to `gemini-2.5-flash`).
+- For OpenAI: Set `OPENAI_API_KEY` and optional `OPENAI_MODEL` (defaults to `gpt-4o-mini`). Custom endpoints like Groq, DeepSeek, or Ollama can be set via `OPENAI_BASE_URL`.
+- Structured JSON responses from either provider are validated as Pydantic models before the state machine uses them.
 
 ## API
 
@@ -53,7 +56,7 @@ One tutoring engine is used for all input types:
 
 ```text
 input adapter -> Unstructured extraction -> structure-aware chunks -> lexical context selection
-             -> Gemini plan/teaching/evaluation -> enforced Feynman state machine
+             -> LLM plan/teaching/evaluation (Gemini or OpenAI) -> enforced Feynman state machine
 ```
 
 There is deliberately no database, vector database, WebSocket, or background worker. `ContextSelector` is a small lexical retrieval interface that can later be replaced by embeddings without changing tutoring code.
