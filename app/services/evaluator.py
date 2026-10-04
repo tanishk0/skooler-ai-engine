@@ -1,10 +1,10 @@
 from app.schemas.learning import Concept, Evaluation, LearningState
 from app.services.context import ContextSelector
-from app.services.llm import GeminiLLMClient
+from app.services.llm import LLMClient
 
 
 class EvaluatorService:
-    def __init__(self, llm: GeminiLLMClient, context_selector: ContextSelector):
+    def __init__(self, llm: LLMClient, context_selector: ContextSelector):
         self.llm = llm
         self.context_selector = context_selector
 
