@@ -1,12 +1,12 @@
 from app.schemas.learning import LearningPlan, LearningModule
 from app.services.context import ContextSelector
-from app.services.llm import GeminiLLMClient
+from app.services.llm import LLMClient
 
 
 class ConceptService:
     def __init__(
         self,
-        llm: GeminiLLMClient,
+        llm: LLMClient,
         context_selector: ContextSelector,
     ):
         self.llm = llm
