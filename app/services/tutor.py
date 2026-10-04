@@ -1,10 +1,10 @@
 from app.schemas.learning import Concept, InteractionOption, InteractionPrompt, InteractionType, LearningState
 from app.services.context import ContextSelector
-from app.services.llm import GeminiLLMClient, TeachingTurn
+from app.services.llm import LLMClient, TeachingTurn
 
 
 class TutorService:
-    def __init__(self, llm: GeminiLLMClient, context_selector: ContextSelector):
+    def __init__(self, llm: LLMClient, context_selector: ContextSelector):
         self.llm = llm
         self.context_selector = context_selector
 
