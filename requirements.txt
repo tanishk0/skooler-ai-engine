@@ -4,6 +4,7 @@ pydantic>=2.8,<3.0
 pydantic-settings>=2.4,<3.0
 python-multipart>=0.0.9,<1.0
 google-genai>=1.0,<2.0
+openai>=1.0,<4.0
 unstructured[pdf]>=0.16,<1.0
 pypdf>=6.0,<7.0
 Pillow>=10.0,<12.0
